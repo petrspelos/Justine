@@ -10,8 +10,7 @@ namespace Justine.Tests
         public void GetNonExistentValueFromConfigTest()
         {
             const string key = "non-existant-key";
-            
-            IJustineConfig config = new JustineConfig();
+            var config = GetNewConfigInstance();
             
             var actual = config.Get(key);
 
@@ -21,24 +20,22 @@ namespace Justine.Tests
         [Fact]
         public void StoreAndRetrieveValueFromConfigTest()
         {
-            var key = $"Unit-Test-Key-{DateTime.Now.ToLongTimeString()}";
-            const string expected = "Hello, Unit Test!";
-            IJustineConfig config = new JustineConfig();
+            var key = GetUniqueKey();
+            const string expectedValue = "Hello, Unit Test!";
+            var config = GetNewConfigInstance();
 
-            config.Set(key, expected);
+            config.Set(key, expectedValue);
             var actual = config.Get(key);
-            Assert.Equal(expected, actual);
             
-            config.Set(key, string.Empty);
-            Assert.Equal(string.Empty, config.Get(key));
+            Assert.Equal(expectedValue, actual);
         }
 
         [Fact]
         public void StoreNewValueInConfigTest()
         {
-            var key = $"Unit-Test-2-Key-{DateTime.Now.ToLongTimeString()}";
+            var key = GetUniqueKey();
             const string expected = "Message!";
-            IJustineConfig config = new JustineConfig();
+            var config = GetNewConfigInstance();
 
             config.Set(key, expected);
             var actual = config.Get(key);
@@ -49,17 +46,28 @@ namespace Justine.Tests
         [Fact]
         public void OverwriteValueInConfigTest()
         {
-            var key = $"Unit-Test-3-Key-{DateTime.Now.ToLongTimeString()}";
-            const string expected = "NEW-VALUE";
-            IJustineConfig config = new JustineConfig();
+            var key = GetUniqueKey();
+            const string expectedOldValue = "OLD-VALUE";
+            const string expectedNewValue = "NEW-VALUE";
+            var config = GetNewConfigInstance();
 
-            config.Set(key, "OLD-VALUE");
-            config.Set(key, expected);
+            config.Set(key, expectedOldValue);
+            var actualOldValue = config.Get(key);
+            Assert.Equal(expectedOldValue, actualOldValue);
+            config.Set(key, expectedNewValue);
+            var actualNewValue = config.Get(key);
 
-            var actual = config.Get(key);
-            Assert.Equal(expected, actual);
+            Assert.Equal(expectedNewValue, actualNewValue);
         }
 
-        //TODO: Refactor unit tests
+        private string GetUniqueKey()
+        {
+            return $"UnitTest-Key-{DateTime.Now:yyyy-MM-dd-HH:mm:ss.fff}";
+        }
+
+        private IJustineConfig GetNewConfigInstance()
+        {
+            return new JustineConfig();
+        }
     }
 }
