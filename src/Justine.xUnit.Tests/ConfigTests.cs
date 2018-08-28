@@ -1,6 +1,7 @@
 using Xunit;
 using Justine.Data;
 using System;
+using System.Configuration;
 
 namespace Justine.Tests
 {
@@ -58,6 +59,48 @@ namespace Justine.Tests
             var actualNewValue = config.Get(key);
 
             Assert.Equal(expectedNewValue, actualNewValue);
+        }
+
+        [Fact]
+        public void ConfigEditorEditAfterSaveTest()
+        {
+            var editor = new ConfigEditor();
+            var key = GetUniqueKey();
+            const string expected = "A";
+
+            editor.CreateSetting(new ConfigSetting(key, expected));
+            editor.Save();
+            editor.UpdateSetting(new ConfigSetting(key, "B"));
+
+            var actual = ConfigurationManager.AppSettings[key];
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void ConfigEditorKeyNotFoundExceptionTest()
+        {
+            var editor = new ConfigEditor();
+            var unknownKey = GetUniqueKey();
+            Assert.Throws<NullReferenceException>(
+                () => editor.UpdateSetting(new ConfigSetting(unknownKey, "Value"))
+            );
+        }
+
+        [Fact]
+        public void ConfigEditorKeyAlreadyExistsAppendTest()
+        {
+            var editor = new ConfigEditor();
+            var key = GetUniqueKey();
+            var expected = "Value,Value2";
+            editor.CreateSetting(new ConfigSetting(key, "Value"));
+            editor.Save();
+            editor.CreateSetting(new ConfigSetting(key, "Value2"));
+            editor.Save();
+
+            var actual = ConfigurationManager.AppSettings[key];
+
+            Assert.Equal(expected, actual);
         }
 
         private string GetUniqueKey()
