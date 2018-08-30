@@ -14,7 +14,7 @@ namespace Justine.Data
             AddOrUpdateSetting(new ConfigSetting(key, value));
         }
 
-        private void AddOrUpdateSetting(ConfigSetting setting)
+        private static void AddOrUpdateSetting(ConfigSetting setting)
         {
             var editor = new ConfigEditor();
             if(KeyExists(setting.Key))
@@ -28,7 +28,7 @@ namespace Justine.Data
             editor.Save();
         }
 
-        private bool KeyExists(string key)
+        private static bool KeyExists(string key)
         {
             return !(ConfigurationManager.AppSettings[key] is null);
         }

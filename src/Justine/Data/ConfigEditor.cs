@@ -4,7 +4,7 @@ namespace Justine.Data
 {
     public class ConfigEditor
     {
-        private Configuration file;
+        private readonly Configuration file;
 
         public ConfigEditor()
         {
