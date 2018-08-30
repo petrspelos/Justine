@@ -1,6 +1,7 @@
 using Xunit;
 using Justine.Data;
 using System;
+using System.Configuration;
 
 namespace Justine.Tests
 {
@@ -10,8 +11,7 @@ namespace Justine.Tests
         public void GetNonExistentValueFromConfigTest()
         {
             const string key = "non-existant-key";
-            
-            IJustineConfig config = new JustineConfig();
+            var config = GetNewConfigInstance();
             
             var actual = config.Get(key);
 
@@ -21,24 +21,22 @@ namespace Justine.Tests
         [Fact]
         public void StoreAndRetrieveValueFromConfigTest()
         {
-            var key = $"Unit-Test-Key-{DateTime.Now.ToLongTimeString()}";
-            const string expected = "Hello, Unit Test!";
-            IJustineConfig config = new JustineConfig();
+            var key = GetUniqueKey();
+            const string expectedValue = "Hello, Unit Test!";
+            var config = GetNewConfigInstance();
 
-            config.Set(key, expected);
+            config.Set(key, expectedValue);
             var actual = config.Get(key);
-            Assert.Equal(expected, actual);
             
-            config.Set(key, string.Empty);
-            Assert.Equal(string.Empty, config.Get(key));
+            Assert.Equal(expectedValue, actual);
         }
 
         [Fact]
         public void StoreNewValueInConfigTest()
         {
-            var key = $"Unit-Test-2-Key-{DateTime.Now.ToLongTimeString()}";
+            var key = GetUniqueKey();
             const string expected = "Message!";
-            IJustineConfig config = new JustineConfig();
+            var config = GetNewConfigInstance();
 
             config.Set(key, expected);
             var actual = config.Get(key);
@@ -49,17 +47,70 @@ namespace Justine.Tests
         [Fact]
         public void OverwriteValueInConfigTest()
         {
-            var key = $"Unit-Test-3-Key-{DateTime.Now.ToLongTimeString()}";
-            const string expected = "NEW-VALUE";
-            IJustineConfig config = new JustineConfig();
+            var key = GetUniqueKey();
+            const string expectedOldValue = "OLD-VALUE";
+            const string expectedNewValue = "NEW-VALUE";
+            var config = GetNewConfigInstance();
 
-            config.Set(key, "OLD-VALUE");
-            config.Set(key, expected);
+            config.Set(key, expectedOldValue);
+            var actualOldValue = config.Get(key);
+            Assert.Equal(expectedOldValue, actualOldValue);
+            config.Set(key, expectedNewValue);
+            var actualNewValue = config.Get(key);
 
-            var actual = config.Get(key);
+            Assert.Equal(expectedNewValue, actualNewValue);
+        }
+
+        [Fact]
+        public void ConfigEditorEditAfterSaveTest()
+        {
+            var editor = new ConfigEditor();
+            var key = GetUniqueKey();
+            const string expected = "A";
+
+            editor.CreateSetting(new ConfigSetting(key, expected));
+            editor.Save();
+            editor.UpdateSetting(new ConfigSetting(key, "B"));
+
+            var actual = ConfigurationManager.AppSettings[key];
+
             Assert.Equal(expected, actual);
         }
 
-        //TODO: Refactor unit tests
+        [Fact]
+        public void ConfigEditorKeyNotFoundExceptionTest()
+        {
+            var editor = new ConfigEditor();
+            var unknownKey = GetUniqueKey();
+            Assert.Throws<NullReferenceException>(
+                () => editor.UpdateSetting(new ConfigSetting(unknownKey, "Value"))
+            );
+        }
+
+        [Fact]
+        public void ConfigEditorKeyAlreadyExistsAppendTest()
+        {
+            var editor = new ConfigEditor();
+            var key = GetUniqueKey();
+            var expected = "Value,Value2";
+            editor.CreateSetting(new ConfigSetting(key, "Value"));
+            editor.Save();
+            editor.CreateSetting(new ConfigSetting(key, "Value2"));
+            editor.Save();
+
+            var actual = ConfigurationManager.AppSettings[key];
+
+            Assert.Equal(expected, actual);
+        }
+
+        private string GetUniqueKey()
+        {
+            return $"UnitTest-Key-{DateTime.Now:yyyy-MM-dd-HH:mm:ss.fff}";
+        }
+
+        private IJustineConfig GetNewConfigInstance()
+        {
+            return new JustineConfig();
+        }
     }
 }
