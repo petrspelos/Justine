@@ -1,6 +1,6 @@
-namespace Justine.Data
+namespace Justine.Settings
 {
-    public interface IJustineConfig
+    public interface JustineSettings
     {
         string Get(string key);
         void Set(string key, string value);

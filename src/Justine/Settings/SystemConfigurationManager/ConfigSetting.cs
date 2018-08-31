@@ -1,11 +1,11 @@
-namespace Justine.Data
+namespace Justine.Settings.SystemConfigurationManager
 {
-    public class ConfigSetting
+    public class SettingKeyValuePair
     {
         public string Key { get; private set; }
         public string Value { get; private set; }
 
-        public ConfigSetting(string key, string value)
+        public SettingKeyValuePair(string key, string value)
         {
             Key = key;
             Value = value;
