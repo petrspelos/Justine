@@ -1,5 +1,6 @@
 # Justine - Discord bot
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d9c0114f2072429eb520ed02dd2fa966)](https://app.codacy.com/app/petrspelos/Justine?utm_source=github.com&utm_medium=referral&utm_content=petrspelos/Justine&utm_campaign=Badge_Grade_Dashboard)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/petrspelos/Justine/blob/master/LICENSE)
 [![Build status](https://ci.appveyor.com/api/projects/status/5sqa35gu330v6dxc?svg=true)](https://ci.appveyor.com/project/petrspelos/justine)
 [![Coverage Status](https://coveralls.io/repos/github/petrspelos/Justine/badge.svg?branch=master)](https://coveralls.io/github/petrspelos/Justine?branch=master)
