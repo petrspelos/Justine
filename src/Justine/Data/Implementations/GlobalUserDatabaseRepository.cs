@@ -1,12 +1,12 @@
-using System.Linq;
 using Justine.Data.DatabaseContexts;
 using Justine.Data.Entities;
+using Justine.Data.Interfaces;
 
-namespace Justine.Data
+namespace Justine.Data.Implementations
 {
-    public class DatabaseStorage : DataStorage
+    public class GlobalUserdatabaseRepository : GlobalUserRepository
     {
-        public void CreateGlobalUser(GlobalUser user)
+        public void Create(GlobalUser user)
         {
             using(var db = new GlobalUserContext())
             {
@@ -15,19 +15,19 @@ namespace Justine.Data
             }
         }
 
-        public GlobalUser GetGlobalUser(ulong discordId)
-        {
-            using(var db = new GlobalUserContext())
-            {
-                return db.GetByDiscordId(discordId);
-            }
-        }
-
-        public bool GlobalUserExists(ulong discordId)
+        public bool ExistsByDiscordId(ulong discordId)
         {
             using(var db = new GlobalUserContext())
             {
                 return db.ExistsByDiscordId(discordId);
+            }
+        }
+
+        public GlobalUser GetByDiscordId(ulong discordId)
+        {
+            using(var db = new GlobalUserContext())
+            {
+                return db.GetByDiscordId(discordId);
             }
         }
     }

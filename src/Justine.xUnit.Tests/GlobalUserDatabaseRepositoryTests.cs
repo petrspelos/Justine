@@ -1,21 +1,22 @@
-using Justine.Data;
 using Justine.Data.Entities;
+using Justine.Data.Implementations;
+using Justine.Data.Interfaces;
 using Xunit;
 
 namespace Justine.Tests
 {
-    public static class DatabaseTests
+    public static class GlobalUserDatabaseRepositoryTests
     {
         [Fact]
         public static void GetGlobalUserTest()
         {
             const long expectedReputation = 28;
             const ulong userDiscordId = 666;
-            DataStorage storage = GetTestDataStorage();
+            GlobalUserRepository userRepository = GetTestDataStorage();
             
-            Assert.True(storage.GlobalUserExists(userDiscordId));
+            Assert.True(userRepository.ExistsByDiscordId(userDiscordId));
 
-            var user = storage.GetGlobalUser(userDiscordId);
+            var user = userRepository.GetByDiscordId(userDiscordId);
 
             Assert.Equal(expectedReputation, user.Reputation);
         }
@@ -24,9 +25,9 @@ namespace Justine.Tests
         public static void GetNonExistentGlobalUserTest()
         {
             const ulong nonExistentId = 1;
-            DataStorage storage = GetTestDataStorage();
+            GlobalUserRepository userRepository = GetTestDataStorage();
             
-            var user = storage.GetGlobalUser(nonExistentId);
+            var user = userRepository.GetByDiscordId(nonExistentId);
 
             Assert.Null(user);
         }
@@ -36,28 +37,28 @@ namespace Justine.Tests
         {
             const ulong userDiscordId = 100;
             const long expectedReputation = 456;
-            DataStorage storage = GetTestDataStorage();
+            GlobalUserRepository userRepository = GetTestDataStorage();
             var expectedUser = new GlobalUser {
                 DiscordId = userDiscordId,
                 Reputation = expectedReputation
             };
 
-            Assert.False(storage.GlobalUserExists(userDiscordId));
+            Assert.False(userRepository.ExistsByDiscordId(userDiscordId));
 
-            storage.CreateGlobalUser(expectedUser);
+            userRepository.Create(expectedUser);
 
-            Assert.True(storage.GlobalUserExists(userDiscordId));
+            Assert.True(userRepository.ExistsByDiscordId(userDiscordId));
 
-            var actualUser = storage.GetGlobalUser(userDiscordId);
+            var actualUser = userRepository.GetByDiscordId(userDiscordId);
 
             Assert.NotNull(actualUser);
             Assert.Equal(expectedUser.Reputation, actualUser.Reputation);
-            Assert.NotEqual(expectedUser.Id, default(int));
+            Assert.NotEqual(0, expectedUser.Id);
         }
 
-        private static DataStorage GetTestDataStorage()
+        private static GlobalUserRepository GetTestDataStorage()
         {
-            return new DatabaseStorage();
+            return new GlobalUserdatabaseRepository();
         }
     }
 }
