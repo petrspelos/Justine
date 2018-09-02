@@ -19,5 +19,10 @@ namespace Justine.Data.DatabaseContexts
         {
             optionsBuilder.UseSqlite("Data Source=Justine.db");
         }
+
+        internal bool ExistsByDiscordId(ulong discordId)
+        {
+            return GlobalUser.Any(gu => gu.DiscordId == discordId);
+        }
     }
 }
