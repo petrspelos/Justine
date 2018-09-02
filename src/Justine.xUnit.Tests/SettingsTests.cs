@@ -5,11 +5,11 @@ using Justine.Settings.SystemConfigurationManager;
 
 namespace Justine.Tests
 {
-    public class SettingsTests
+    public static class SettingsTests
     {
 
         [Fact]
-        public void StoreNewValueTest()
+        public static void StoreNewValueTest()
         {
             const string expected = "Message!";
             var key = GetUniqueKey();
@@ -22,7 +22,7 @@ namespace Justine.Tests
         }
 
         [Fact]
-        public void StoreAndRetrieveValueTest()
+        public static void StoreAndRetrieveValueTest()
         {
             var key = GetUniqueKey();
             const string expectedValue = "Hello, Unit Test!";
@@ -35,7 +35,7 @@ namespace Justine.Tests
         }
 
         [Fact]
-        public void OverwriteValueTest()
+        public static void OverwriteValueTest()
         {
             const string expected = "B";
             var settings = GetNewSettings();
@@ -49,7 +49,7 @@ namespace Justine.Tests
         }
 
         [Fact]
-        public void GetNonExistentValueTest()
+        public static void GetNonExistentValueTest()
         {
             const string key = "non-existant-key";
             var settings = GetNewSettings();
