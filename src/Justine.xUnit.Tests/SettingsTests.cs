@@ -59,12 +59,12 @@ namespace Justine.Tests
             Assert.Null(actual);
         }
 
-        private string GetUniqueKey()
+        private static string GetUniqueKey()
         {
             return $"UnitTest-Key-{DateTime.Now:yyyy-MM-dd-HH:mm:ss.fff}";
         }
 
-        private JustineSettings GetNewSettings()
+        private static JustineSettings GetNewSettings()
         {
             return new JustineSystemConfigurationManagerSettings();
         }
