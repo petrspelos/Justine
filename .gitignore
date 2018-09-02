@@ -333,3 +333,7 @@ ASALocalRun/
 
 # VSCode
 .vscode/
+
+# Coverage reports
+coverage.json
+*.opencover.xml
