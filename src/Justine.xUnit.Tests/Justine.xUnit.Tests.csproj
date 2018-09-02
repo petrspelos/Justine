@@ -8,9 +8,10 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="*"/>
     <PackageReference Include="xunit" Version="*"/>
     <PackageReference Include="xunit.runner.visualstudio" Version="*"/>
+    <PackageReference Include="coverlet.msbuild" Version="*"/>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="../Justine/Justine.csproj" />
+    <ProjectReference Include="../Justine/Justine.csproj"/>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Justine.db">
