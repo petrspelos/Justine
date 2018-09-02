@@ -12,4 +12,9 @@
   <ItemGroup>
     <ProjectReference Include="../Justine/Justine.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Justine.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 </Project>
