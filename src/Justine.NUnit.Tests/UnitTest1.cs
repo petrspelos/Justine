@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace Tests
+namespace Justine.Tests
 {
     public class Tests
     {
