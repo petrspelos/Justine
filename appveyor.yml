@@ -10,7 +10,7 @@ build_script:
   - dotnet build ./src -c Release
 test_script:
 - ps: >-
-    dotnet test ./src/Justine.xUnit.Tests /p:CollectCoverage=true /p:Include=\"[Justine*]*\" /p:CoverletOutputFormat=opencover /p:Threshold=100 /p:ThresholdType=line
+    dotnet test ./src/Justine.NUnit.Tests/Justine.NUnit.Tests.csproj /p:CollectCoverage=true /p:Include=[Justine*]* /p:Exclude=[NUnit3.TestAdapter*]* /p:CoverletOutputFormat=opencover /p:Threshold=100 /p:ThresholdType=line
 
     nuget install OpenCover -OutputDirectory packages -Version 4.6.519
 
@@ -18,4 +18,4 @@ test_script:
 
     $coveralls = ".\tools\csmacnz.coveralls.exe"
 
-    & $coveralls --opencover -i ./src/Justine.xUnit.Tests/coverage.opencover.xml --repoToken $env:COVERALLS_REPO_TOKEN --commitId $env:APPVEYOR_REPO_COMMIT --commitBranch $env:APPVEYOR_REPO_BRANCH --commitAuthor $env:APPVEYOR_REPO_COMMIT_AUTHOR --commitEmail $env:APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL --commitMessage $env:APPVEYOR_REPO_COMMIT_MESSAGE --jobId $env:APPVEYOR_JOB_ID
+    & $coveralls --opencover -i ./src/Justine.NUnit.Tests/coverage.opencover.xml --repoToken $env:COVERALLS_REPO_TOKEN --commitId $env:APPVEYOR_REPO_COMMIT --commitBranch $env:APPVEYOR_REPO_BRANCH --commitAuthor $env:APPVEYOR_REPO_COMMIT_AUTHOR --commitEmail $env:APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL --commitMessage $env:APPVEYOR_REPO_COMMIT_MESSAGE --jobId $env:APPVEYOR_JOB_ID

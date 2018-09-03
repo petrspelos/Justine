@@ -1,13 +1,13 @@
 using Justine.Data.Entities;
 using Justine.Data.Implementations;
 using Justine.Data.Interfaces;
-using Xunit;
+using NUnit.Framework;
 
 namespace Justine.Tests
 {
     public static class GlobalUserDatabaseRepositoryTests
     {
-        [Fact]
+        [Test]
         public static void GetGlobalUserTest()
         {
             const long expectedReputation = 28;
@@ -18,10 +18,10 @@ namespace Justine.Tests
 
             var user = userRepository.GetByDiscordId(userDiscordId);
 
-            Assert.Equal(expectedReputation, user.Reputation);
+            Assert.AreEqual(expectedReputation, user.Reputation);
         }
 
-        [Fact]
+        [Test]
         public static void GetNonExistentGlobalUserTest()
         {
             const ulong nonExistentId = 1;
@@ -29,10 +29,10 @@ namespace Justine.Tests
             
             var user = userRepository.GetByDiscordId(nonExistentId);
 
-            Assert.Null(user);
+            Assert.IsNull(user);
         }
 
-        [Fact]
+        [Test]
         public static void CreateAndRetrieveGlobalUserTest()
         {
             const ulong userDiscordId = 100;
@@ -51,9 +51,9 @@ namespace Justine.Tests
 
             var actualUser = userRepository.GetByDiscordId(userDiscordId);
 
-            Assert.NotNull(actualUser);
-            Assert.Equal(expectedUser.Reputation, actualUser.Reputation);
-            Assert.NotEqual(0, expectedUser.Id);
+            Assert.IsNotNull(actualUser);
+            Assert.AreEqual(expectedUser.Reputation, actualUser.Reputation);
+            Assert.Greater(expectedUser.Id, 0);
         }
 
         private static GlobalUserRepository GetTestDataStorage()

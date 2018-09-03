@@ -1,10 +1,10 @@
-using Xunit;
+using NUnit.Framework;
 
 namespace Justine.Tests
 {
     public static class MainTests
     {
-        [Fact]
+        [Test]
         public static void MainDoesNotThrow_Test()
         {
             Program.Main(new [] {""});

@@ -1,4 +1,4 @@
-using Xunit;
+using NUnit.Framework;
 using System;
 using Justine.Settings;
 using Justine.Settings.SystemConfigurationManager;
@@ -8,7 +8,7 @@ namespace Justine.Tests
     public static class SettingsTests
     {
 
-        [Fact]
+        [Test]
         public static void StoreNewValueTest()
         {
             const string expected = "Message!";
@@ -18,10 +18,10 @@ namespace Justine.Tests
             settings.Set(key, expected);
             var actual = settings.Get(key);
 
-            Assert.Equal(expected, actual);
+            Assert.AreEqual(expected, actual);
         }
 
-        [Fact]
+        [Test]
         public static void StoreAndRetrieveValueTest()
         {
             var key = GetUniqueKey();
@@ -31,10 +31,10 @@ namespace Justine.Tests
             settings.Set(key, expectedValue);
             var actual = settings.Get(key);
             
-            Assert.Equal(expectedValue, actual);
+            Assert.AreEqual(expectedValue, actual);
         }
 
-        [Fact]
+        [Test]
         public static void OverwriteValueTest()
         {
             const string expected = "B";
@@ -45,10 +45,10 @@ namespace Justine.Tests
             settings.Set(key, expected);
             var actual = settings.Get(key);
 
-            Assert.Equal(expected, actual);
+            Assert.AreEqual(expected, actual);
         }
 
-        [Fact]
+        [Test]
         public static void GetNonExistentValueTest()
         {
             const string key = "non-existant-key";
@@ -56,7 +56,7 @@ namespace Justine.Tests
             
             var actual = settings.Get(key);
 
-            Assert.Null(actual);
+            Assert.IsNull(actual);
         }
 
         private static string GetUniqueKey()
