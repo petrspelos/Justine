@@ -39,7 +39,7 @@ If you just want a copy of the code:
 
 **Setting up the development environment**
 
-* The solution file can be found at `src/Justine.sln`, it links to the two `.csproj` files: `Justine.csproj` and `Justine.xUnit.Tests.csproj` for unit tests.
+* The solution file can be found at `src/Justine.sln`, it links to the two `.csproj` files: `Justine.csproj` and `Justine.NUnit.Tests.csproj` for unit tests.
 
 * It is recommended to open the root directory in your IDE.
 
@@ -47,12 +47,16 @@ If you just want a copy of the code:
 
 ## Running the tests
 
-To run Unit Tests in Visual Studio Code, you use the `ALT + R, ALT + A` shortcut to open the command palette that can navigate you through setting up a new test action.
+To run Unit Tests in Visual Studio Code, you use the `CTRL + SHIFT + P` shortcut to open the command palette where you can invoke the `Tasks: Run Test Task` command.
 
 Alternatively, you can navigate to the `src/` directory in through command prompt and run the following command: 
 ``` bash
-dotnet test Justine.xUnit.Tests/Justine.xUnit.Tests.csproj
+dotnet test Justine.NUnit.Tests /p:CollectCoverage=true /p:Include=[Justine*]* /p:Exclude=[NUnit3.TestAdapter*]* /p:CoverletOutputFormat=opencover /p:Threshold=100 /p:ThresholdType=line
 ```
+
+This command will run the Unit Tests as well as generate the code coverage report.
+
+*Note that Unit Tests will fail if your code coverage is bellow 100%.
 
 ## Deployment
 
