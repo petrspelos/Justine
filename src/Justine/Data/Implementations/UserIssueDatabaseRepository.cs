@@ -6,6 +6,14 @@ namespace Justine.Data.Implementations
 {
     public class UserIssueDatabaseRepository : UserIssueRepository
     {
+        public void Add(UserIssue issue)
+        {
+            using(var db = new UserIssueContext())
+            {
+                db.CreateIssue(issue);
+            }
+        }
+
         public UserIssue GetByMessageId(ulong id)
         {
             using(var db = new UserIssueContext())

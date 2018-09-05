@@ -20,6 +20,19 @@ namespace Justine.Data.DatabaseContexts
             return UserIssue.FirstOrDefault(ui => ui.Id == id);
         }
 
+        internal void CreateIssue(UserIssue issue)
+        {
+            try
+            {
+                Add(issue);
+                SaveChanges();
+            }
+            catch(DbUpdateException)
+            {
+                throw new ArgumentException();
+            }
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite("Data Source=Justine.db");
