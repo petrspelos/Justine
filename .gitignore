@@ -337,3 +337,4 @@ launch.json
 # Coverage reports
 coverage.json
 *.opencover.xml
+coverage.info

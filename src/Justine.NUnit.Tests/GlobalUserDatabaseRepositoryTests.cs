@@ -20,7 +20,7 @@ namespace Justine.Tests
         {
             var expectedUser = new GlobalUser 
             {
-                Id = 666,
+                Id = TestConstants.TestUserId,
                 Reputation = 28
             };
 
@@ -30,9 +30,7 @@ namespace Justine.Tests
         [Test]
         public void GetNonExistentGlobalUserTest()
         {
-            const ulong nonExistentId = 1;
-            
-            var user = globalUserRepository.GetById(nonExistentId);
+            var user = globalUserRepository.GetById(TestConstants.NonExistentId);
 
             Assert.IsNull(user);
         }
