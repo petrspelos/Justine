@@ -1,0 +1,32 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/src/Justine/Justine.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "test",
+            "group": "test",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "test",
+                "${workspaceFolder}/src/Justine.NUnit.Tests/Justine.NUnit.Tests.csproj",
+                "/p:CollectCoverage=true",
+                "/p:Include=[Justine*]*",
+                "/p:Exclude=[NUnit3.TestAdapter*]*",
+                "/p:CoverletOutputFormat=opencover",
+                "/p:Threshold=100",
+                "/p:ThresholdType=line"
+            ],
+            "problemMatcher": "$msCompile"
+        }
+    ]
+}
