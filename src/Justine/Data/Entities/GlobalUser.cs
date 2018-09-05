@@ -2,8 +2,7 @@ namespace Justine.Data.Entities
 {
     public class GlobalUser
     {
-        public int Id { get; set; }
-        public ulong DiscordId { get; set; }
+        public ulong Id { get; set; }
         public long Reputation { get; set; }
     }
 }
