@@ -333,6 +333,7 @@ ASALocalRun/
 
 # VSCode
 launch.json
+settings.json
 
 # Coverage reports
 coverage.json

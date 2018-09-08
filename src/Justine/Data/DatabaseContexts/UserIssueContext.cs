@@ -37,5 +37,18 @@ namespace Justine.Data.DatabaseContexts
         {
             optionsBuilder.UseSqlite("Data Source=Justine.db");
         }
+
+        internal void UpdateIssue(UserIssue issue)
+        {
+            try
+            {
+                Update(issue);
+                SaveChanges();
+            }
+            catch(DbUpdateException)
+            {
+                throw new ArgumentException();
+            }
+        }
     }
 }

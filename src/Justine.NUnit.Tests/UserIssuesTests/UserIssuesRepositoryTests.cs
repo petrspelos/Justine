@@ -76,6 +76,39 @@ namespace Justine.Tests.UserIssuesTests
             Assert.Throws<ArgumentException>(() => userIssueRepository.Add(issue));
         }
 
+        [Test]
+        public void ModifyNewIssueTest()
+        {
+            const string expectedContents = "Different";
+            var issue = new UserIssue
+            {
+                Id = 112,
+                UserId = 113,
+                Contents = "Hello, World!"
+            };
+            userIssueRepository.Add(issue);
+
+            userIssueRepository.Modify(issue, u => u.Contents = expectedContents);
+            
+            Assert.AreEqual(expectedContents, issue.Contents);
+            AssertIssueExists(issue);
+        }
+
+        [Test]
+        public void ModifyNonExistentThrowsTest()
+        {
+            var issue = new UserIssue
+            {
+                Id = TestConstants.NonExistentId,
+                UserId = 115,
+                Contents = "NON-EXISTENT"
+            };
+
+            Assert.Throws<ArgumentException>(
+                () => userIssueRepository.Modify(issue, i => i.Contents = "ABC")
+            );
+        }
+
         private void AssertIssueExists(UserIssue issue)
         {
             var storedIssueByUser = userIssueRepository.GetByUserId(issue.UserId);
