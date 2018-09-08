@@ -339,3 +339,6 @@ settings.json
 coverage.json
 *.opencover.xml
 coverage.info
+
+# Application
+App.config

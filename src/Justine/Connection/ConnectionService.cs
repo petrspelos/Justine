@@ -1,7 +1,9 @@
+using System.Threading.Tasks;
+
 namespace Justine.Connection
 {
     public interface ConnectionService
     {
-        void Connect();
+        Task ConnectAsync();
     }
 }
