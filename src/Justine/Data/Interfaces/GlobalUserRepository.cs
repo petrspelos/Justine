@@ -4,8 +4,8 @@ namespace Justine.Data.Interfaces
 {
     public interface GlobalUserRepository
     {
-        GlobalUser GetByDiscordId(ulong discordId);
+        GlobalUser GetById(ulong id);
         void Create(GlobalUser user);
-        bool ExistsByDiscordId(ulong discordId);
+        bool ExistsById(ulong id);
     }
 }

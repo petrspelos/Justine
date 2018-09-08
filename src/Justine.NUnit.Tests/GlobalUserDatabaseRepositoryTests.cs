@@ -20,7 +20,7 @@ namespace Justine.Tests
         {
             var expectedUser = new GlobalUser 
             {
-                DiscordId = 666,
+                Id = TestConstants.TestUserId,
                 Reputation = 28
             };
 
@@ -30,9 +30,7 @@ namespace Justine.Tests
         [Test]
         public void GetNonExistentGlobalUserTest()
         {
-            const ulong nonExistentId = 1;
-            
-            var user = globalUserRepository.GetByDiscordId(nonExistentId);
+            var user = globalUserRepository.GetById(TestConstants.NonExistentId);
 
             Assert.IsNull(user);
         }
@@ -41,7 +39,7 @@ namespace Justine.Tests
         public void CreateAndRetrieveGlobalUserTest()
         {
             var expectedUser = new GlobalUser {
-                DiscordId = 100,
+                Id = 100,
                 Reputation = 456
             };
 
@@ -51,19 +49,18 @@ namespace Justine.Tests
 
         private void TestCreateNonExistentGlobalUser(GlobalUser newUser)
         {
-            Assert.False(globalUserRepository.ExistsByDiscordId(newUser.DiscordId));
+            Assert.False(globalUserRepository.ExistsById(newUser.Id));
 
             globalUserRepository.Create(newUser);
 
-            Assert.True(globalUserRepository.ExistsByDiscordId(newUser.DiscordId));
-            Assert.Greater(newUser.Id, 0);
+            Assert.True(globalUserRepository.ExistsById(newUser.Id));
         }
 
         private void TestRetrieveExistingGlobalUser(GlobalUser expectedUser)
         {
-            Assert.True(globalUserRepository.ExistsByDiscordId(expectedUser.DiscordId));
+            Assert.True(globalUserRepository.ExistsById(expectedUser.Id));
 
-            var actualUser = globalUserRepository.GetByDiscordId(expectedUser.DiscordId);
+            var actualUser = globalUserRepository.GetById(expectedUser.Id);
 
             Assert.AreEqual(expectedUser.Reputation, actualUser.Reputation);
         }

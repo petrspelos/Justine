@@ -10,19 +10,19 @@ namespace Justine.Data.DatabaseContexts
     {
         internal DbSet<GlobalUser> GlobalUser { get; set; }
 
-        internal GlobalUser GetByDiscordId(ulong id)
+        internal GlobalUser GetById(ulong id)
         {
-            return GlobalUser.FirstOrDefault(gu => gu.DiscordId == id);
+            return GlobalUser.FirstOrDefault(gu => gu.Id == id);
+        }
+
+        internal bool ExistsById(ulong id)
+        {
+            return GlobalUser.Any(gu => gu.Id == id);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite("Data Source=Justine.db");
-        }
-
-        internal bool ExistsByDiscordId(ulong discordId)
-        {
-            return GlobalUser.Any(gu => gu.DiscordId == discordId);
         }
     }
 }

@@ -15,19 +15,19 @@ namespace Justine.Data.Implementations
             }
         }
 
-        public bool ExistsByDiscordId(ulong discordId)
+        public bool ExistsById(ulong id)
         {
             using(var db = new GlobalUserContext())
             {
-                return db.ExistsByDiscordId(discordId);
+                return db.ExistsById(id);
             }
         }
 
-        public GlobalUser GetByDiscordId(ulong discordId)
+        public GlobalUser GetById(ulong id)
         {
             using(var db = new GlobalUserContext())
             {
-                return db.GetByDiscordId(discordId);
+                return db.GetById(id);
             }
         }
     }

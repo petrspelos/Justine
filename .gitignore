@@ -332,8 +332,10 @@ ASALocalRun/
 .localhistory/
 
 # VSCode
-.vscode/
+launch.json
+settings.json
 
 # Coverage reports
 coverage.json
 *.opencover.xml
+coverage.info
