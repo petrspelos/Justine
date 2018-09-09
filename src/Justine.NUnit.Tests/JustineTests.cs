@@ -1,7 +1,8 @@
 using NUnit.Framework;
 using Moq;
-using Justine.Connection;
+using Justine.Discord.Connection;
 using System.Threading.Tasks;
+using Justine.Discord.Handlers;
 
 namespace Justine.Tests
 {
@@ -11,7 +12,8 @@ namespace Justine.Tests
         public async Task JustineRunTest()
         {
             var connService = new Mock<ConnectionService>().Object;
-            var justine = new Justine(connService);
+            var cmdHandler = new Mock<CommandHandler>().Object;
+            var justine = new Justine(connService, cmdHandler);
             await justine.RunAsync();
         }
     }

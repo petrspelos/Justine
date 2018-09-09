@@ -1,10 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using Discord.WebSocket;
-using Justine.Connection;
-using Justine.Settings;
-using Justine.Settings.SystemConfigurationManager;
-using Lamar;
+﻿using System.Threading.Tasks;
 
 namespace Justine
 {
@@ -12,14 +6,10 @@ namespace Justine
     {
         public static async Task Main(string[] args)
         {
-            var container = new Container(c =>
-            {
-                c.For<JustineSettings>().Use<JustineSystemConfigurationManagerSettings>();
-                c.ForSingletonOf<ConnectionService>().Use<DiscordConnectionService>();
-                c.ForSingletonOf<DiscordSocketClient>();
-            });
-
-            await container.GetInstance<Justine>().RunAsync();
+            // var a = InversonOfControl.Container.GetInstance<Dummy>();
+            // var b = InversonOfControl.Container.GetInstance<Dummy>();
+            await InversionOfControl.Container.GetInstance<Justine>().RunAsync();
+            await Task.Delay(-1);
         }
     }
 }

@@ -6,7 +6,7 @@ using Discord.Net;
 using Discord.WebSocket;
 using Justine.Settings;
 
-namespace Justine.Connection
+namespace Justine.Discord.Connection
 {
     public class DiscordConnectionService : ConnectionService
     {
@@ -17,6 +17,13 @@ namespace Justine.Connection
         {
             this.justineSettings = justineSettings;
             this.discordClient = discordClient;
+            discordClient.Log += Log;
+        }
+
+        private Task Log(LogMessage arg)
+        {
+            System.Console.WriteLine(arg.Message);
+            return Task.CompletedTask;
         }
 
         public async Task ConnectAsync()

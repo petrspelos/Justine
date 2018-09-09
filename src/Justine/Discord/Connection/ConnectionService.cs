@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace Justine.Connection
+namespace Justine.Discord.Connection
 {
     public interface ConnectionService
     {
