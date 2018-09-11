@@ -13,7 +13,8 @@ namespace Justine.Tests
         {
             var connService = new Mock<ConnectionService>().Object;
             var cmdHandler = new Mock<CommandHandler>().Object;
-            var justine = new Justine(connService, cmdHandler);
+            var msgHandler = new Mock<MessageHandler>().Object;
+            var justine = new Justine(connService, cmdHandler, msgHandler);
             await justine.RunAsync();
         }
     }
