@@ -1,12 +1,13 @@
-﻿using System;
+﻿using System.Threading.Tasks;
 
 namespace Justine
 {
     public static class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            await InversionOfControl.Container.GetInstance<Justine>().RunAsync();
+            await Task.Delay(-1).ConfigureAwait(false);
         }
     }
 }

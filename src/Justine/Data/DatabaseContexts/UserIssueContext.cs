@@ -29,7 +29,7 @@ namespace Justine.Data.DatabaseContexts
             }
             catch(DbUpdateException)
             {
-                throw new ArgumentException();
+                throw new ArgumentException("User Issue already exists.");
             }
         }
 
@@ -47,7 +47,7 @@ namespace Justine.Data.DatabaseContexts
             }
             catch(DbUpdateException)
             {
-                throw new ArgumentException();
+                throw new ArgumentException("User Issue doesn't exist.");
             }
         }
     }

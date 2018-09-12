@@ -20,8 +20,8 @@
                 "test",
                 "${workspaceFolder}/src/Justine.NUnit.Tests/Justine.NUnit.Tests.csproj",
                 "/p:CollectCoverage=true",
-                "/p:Include=[Justine*]*",
-                "/p:Exclude=[NUnit3.TestAdapter*]*",
+                "/p:Include=[Justine]*",
+                "/p:Exclude=\"[Justine]Justine.Discord.*,[Justine]Justine.Program,[NUnit3.TestAdapter]*\"",
                 "/p:CoverletOutputFormat=opencover",
                 "/p:Threshold=100",
                 "/p:ThresholdType=line"
