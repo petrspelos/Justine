@@ -38,7 +38,7 @@ namespace Justine.Discord.Providers
             return messsage.Content.StartsWith(Constants.NewIssueToken);
         }
 
-        private async Task<ulong> CreateIssueMessage(SocketCommandContext context)
+        private static async Task<ulong> CreateIssueMessage(SocketCommandContext context)
         {
             var issuesBoard = context.Guild.GetTextChannel(Constants.IssuesBoardId);
             var message = await issuesBoard.SendMessageAsync(GetIssueText(context));
