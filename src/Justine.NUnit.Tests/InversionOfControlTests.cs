@@ -2,13 +2,13 @@ using NUnit.Framework;
 
 namespace Justine.Tests
 {
-    public class InversionOfControlTests
+    public static class InversionOfControlTests
     {
         [Test]
         public static void IocContainerTest()
         {
             var container = InversionOfControl.Container;
-            var justine = container.GetInstance<Justine>();
+            container.GetInstance<Justine>();
         }
     }
 }

@@ -6,10 +6,10 @@ using Justine.Discord.Handlers;
 
 namespace Justine.Tests
 {
-    public class JustineTests
+    public static class JustyineTests
     {
         [Test]
-        public async Task JustineRunTest()
+        public static async Task JustineRunTest()
         {
             var connService = new Mock<ConnectionService>().Object;
             var cmdHandler = new Mock<CommandHandler>().Object;

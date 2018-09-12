@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 using Discord.Commands;
 using Discord.WebSocket;
@@ -26,8 +25,8 @@ namespace Justine.Discord.Handlers
 
         private async Task HandleMessage(SocketMessage s)
         {
-            if (!(s is SocketUserMessage msg)) return;
-            if (msg.Channel is SocketDMChannel) return;            
+            if (!(s is SocketUserMessage msg)){ return; }
+            if (msg.Channel is SocketDMChannel){ return; }
             
             var context = new SocketCommandContext(client, msg);
 

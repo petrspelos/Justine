@@ -19,12 +19,18 @@ namespace Justine
         {
             get
             {
-                if(container is null)
-                {
-                    InitializeContainer();
-                }
-                return container;
+                return GetOrInitContainer();
             }
+        }
+
+        private static Container GetOrInitContainer()
+        {
+            if(container is null)
+            {
+                InitializeContainer();
+            }
+
+            return container;
         }
 
         public static void InitializeContainer()

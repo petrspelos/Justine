@@ -19,7 +19,7 @@ namespace Justine.Discord.Providers
         {
             if(MessageIsNewIssue(context.Message))
             {
-                await CreateNewIssue(context);
+                await CreateNewIssue(context).ConfigureAwait(false);
             }
         }
 
@@ -27,13 +27,13 @@ namespace Justine.Discord.Providers
         {
             userIssuesService.NewIssue(new UserIssue
             {
-                Id = await CreateIssueMessage(context),
+                Id = await CreateIssueMessage(context).ConfigureAwait(false),
                 UserId = context.User.Id,
                 Contents = context.Message.Content
             });
         }
 
-        private bool MessageIsNewIssue(SocketUserMessage messsage)
+        private static bool MessageIsNewIssue(SocketUserMessage messsage)
         {
             return messsage.Content.StartsWith(Constants.NewIssueToken);
         }
@@ -45,7 +45,7 @@ namespace Justine.Discord.Providers
             return message.Id;
         }
 
-        private string GetIssueText(SocketCommandContext context)
+        private static string GetIssueText(SocketCommandContext context)
         {
             var contents = context.Message.Content;
             var user = context.User as SocketGuildUser;

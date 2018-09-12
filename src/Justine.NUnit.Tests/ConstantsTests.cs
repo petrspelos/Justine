@@ -1,12 +1,11 @@
-using System;
 using NUnit.Framework;
 
 namespace Justine.Tests
 {
-    public class ConstantsTests
+    public static class ConstantsTests
     {
         [Test]
-        public void SettingKeyIsConstant()
+        public static void SettingKeyIsConstant()
         {
             Assert.NotNull(Constants.SettingKeyDiscordToken);
         }

@@ -17,18 +17,11 @@ namespace Justine.Discord.Connection
         {
             this.justineSettings = justineSettings;
             this.discordClient = discordClient;
-            discordClient.Log += Log;
-        }
-
-        private Task Log(LogMessage arg)
-        {
-            System.Console.WriteLine(arg.Message);
-            return Task.CompletedTask;
         }
 
         public async Task ConnectAsync()
         {
-            await TryLoginAsync();
+            await TryLoginAsync().ConfigureAwait(false);
             await discordClient.StartAsync();
         }
 

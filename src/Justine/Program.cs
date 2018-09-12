@@ -7,7 +7,7 @@ namespace Justine
         public static async Task Main(string[] args)
         {
             await InversionOfControl.Container.GetInstance<Justine>().RunAsync();
-            await Task.Delay(-1);
+            await Task.Delay(-1).ConfigureAwait(false);
         }
     }
 }

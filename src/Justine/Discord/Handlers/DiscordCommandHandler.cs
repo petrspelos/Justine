@@ -1,7 +1,5 @@
-using System;
 using System.Reflection;
 using System.Threading.Tasks;
-using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
 
@@ -26,21 +24,22 @@ namespace Justine.Discord.Handlers
 
         private async Task HandleCommandAsync(SocketMessage s)
         {
-            if (!(s is SocketUserMessage msg)) return;
+            if (!(s is SocketUserMessage msg))
+            {
+                return;
+            }
             
-            var context = new SocketCommandContext(client, msg);
-
             var argPos = 0;
             if (msg.HasMentionPrefix(client.CurrentUser, ref argPos))
             {
-                await TryRunAsBotCommand(context, argPos);
+                var context = new SocketCommandContext(client, msg);
+                await TryRunAsBotCommand(context, argPos).ConfigureAwait(false);
             }
         }
 
         private async Task TryRunAsBotCommand(SocketCommandContext context, int argPos)
         {
-            var cmdSearchResult = commandService.Search(context, argPos);
-            var commandTask = await commandService.ExecuteAsync(context, argPos, InversionOfControl.Container);
+            await commandService.ExecuteAsync(context, argPos, InversionOfControl.Container);
         }
     }
 }
