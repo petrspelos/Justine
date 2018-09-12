@@ -36,9 +36,16 @@ namespace Justine.Data.Implementations
             changes.Invoke(issue);
             
             using(var db = new UserIssueContext())
-            {
-                
+            {    
                 db.UpdateIssue(issue);
+            }
+        }
+
+        public void RemoveById(ulong id)
+        {
+            using(var db = new UserIssueContext())
+            {
+                db.RemoveIssueById(id);
             }
         }
     }

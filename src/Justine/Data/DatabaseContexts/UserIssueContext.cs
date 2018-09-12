@@ -50,5 +50,18 @@ namespace Justine.Data.DatabaseContexts
                 throw new ArgumentException("User Issue doesn't exist.");
             }
         }
+
+        internal void RemoveIssueById(ulong id)
+        {
+            try
+            {
+                Remove(new UserIssue { Id = id });
+                SaveChanges();
+            }
+            catch(DbUpdateException)
+            {
+                throw new ArgumentException("Issue doesn't exist.");
+            }
+        }
     }
 }

@@ -109,6 +109,29 @@ namespace Justine.Tests.UserIssuesTests
             );
         }
 
+        [Test]
+        public void RemoveIssueTest()
+        {
+            var issue = new UserIssue
+            {
+                Id = 116,
+                UserId = 117,
+                Contents = "My Cool Issue!" 
+            };
+            userIssueRepository.Add(issue);
+            AssertIssueExists(issue);
+            userIssueRepository.RemoveById(116);
+            Assert.Null(userIssueRepository.GetByMessageId(116));
+        }
+
+        [Test]
+        public void RemoveNonExistentIssueThrowsTest()
+        {
+            Assert.Throws<ArgumentException>(
+                () => userIssueRepository.RemoveById(TestConstants.NonExistentId)
+            );
+        }
+
         private void AssertIssueExists(UserIssue issue)
         {
             var storedIssueByUser = userIssueRepository.GetByUserId(issue.UserId);

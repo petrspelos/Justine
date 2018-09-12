@@ -9,5 +9,6 @@ namespace Justine.Data.Interfaces
         UserIssue GetByMessageId(ulong id);
         void Add(UserIssue issue);
         void Modify(UserIssue issue, Action<UserIssue> changes);
+        void RemoveById(ulong id);
     }
 }
